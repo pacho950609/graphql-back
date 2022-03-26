@@ -1,0 +1,20 @@
+{
+    "presets": ["@babel/env", "@babel/typescript"],
+    "plugins": [
+      "@babel/plugin-transform-runtime",
+      "@babel/proposal-object-rest-spread",
+      "babel-plugin-transform-typescript-metadata",
+      ["@babel/plugin-proposal-decorators", { "legacy": true }],
+      ["@babel/plugin-proposal-class-properties", { "loose": true }],
+      "@babel/plugin-proposal-optional-chaining",
+      [
+        "module-resolver",
+        {
+          "extensions": [".ts"],
+          "root": ["./src"]
+        }
+      ]
+    ],
+    "ignore": ["src/bin/migrationConfigs/*.ts"]
+  }
+  

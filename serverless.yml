@@ -1,0 +1,32 @@
+service: potter-back
+
+custom: ${file(resources/config/custom.yml):custom}
+#app: your-app-name
+#tenant: your-tenant-name
+
+# Add the serverless-webpack plugin
+plugins:
+  - serverless-offline-lambda
+  - serverless-offline
+
+provider:
+  name: aws
+  runtime: nodejs10.x
+  stage: ${opt:stage,'local'}
+  iamRoleStatements: ${file(resources/config/iamRole.yml):iamRoleStatements}
+  environment: ${file(resources/config/env.yml):environment}
+
+functions:
+  signup:
+    handler: lib/handlers/auth/auth-handler.signUpHandler
+    events:
+      - http:
+          method: post
+          path: signup
+  login:
+    handler: lib/handlers/auth/auth-handler.loginHandler
+    events:
+      - http:
+          method: post
+          path: login
+          cors: true

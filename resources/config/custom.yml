@@ -1,0 +1,12 @@
+custom:
+  kinesisShardCount:
+    prod: 2
+    else: 1
+  dbName:
+    else: potter
+  dbUsername:
+    else: postgres
+  dbPassword:
+    else: postgres
+  dbUrl:
+    else: localhost
