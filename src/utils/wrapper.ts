@@ -57,7 +57,6 @@ export const handlerWrapper = async <T>(
             // let tokenId;
             // tokenId = await validateToken(token);
             res = await operation(connection);
-            
         } else {
             res = await operation(connection);
         }

@@ -15,10 +15,9 @@ export class Database {
 
     public async getConnection(): Promise<Connection> {
         const connectionManager = getConnectionManager();
-        if(!connectionManager.has('potter')){
-            return await createConnection({...this.config});
-        } else {
-            return connectionManager.get('potter')
+        if (!connectionManager.has('potter')) {
+            return await createConnection({ ...this.config });
         }
+        return connectionManager.get('potter');
     }
 }
