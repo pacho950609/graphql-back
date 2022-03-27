@@ -10,4 +10,11 @@ export class Player {
 
     @Column()
     lastName: string;
+
+    constructor(payload: Omit<Player, 'id'> = null) {
+        if (payload) {
+            this.name = payload.name;
+            this.lastName = payload.lastName;
+        }
+    }
 }

@@ -3,9 +3,19 @@ import { Match } from 'entities/Match';
 import { Player } from 'entities/Player';
 import { Connection } from 'typeorm';
 
-export const getPlayerRanking = async () => {
+export const getPlayerRanking = async (
+    connectionI: Connection = null,
+): Promise<
+    {
+        id: string;
+        name: string;
+        lastName: string;
+        wins: number;
+        losses: number;
+    }[]
+> => {
     const database = new Database();
-    const connection: Connection = await database.getConnection();
+    const connection: Connection = connectionI || (await database.getConnection());
 
     return await connection.manager
         .createQueryBuilder(Player, 'player')

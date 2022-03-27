@@ -7,7 +7,7 @@
     "start": "npm run build && npm run serverless:up",
     "start:dev": "npm start",
     "serverless:up": "npx sls offline --corsAllowOrigin  start --stage local ",
-    "test": "npm run build && source ./.test.env && jest --detectOpenHandles --coverage --setupFiles dotenv/config --runInBand --forceExit --verbose false ./lib/**",
+    "test": "npm run build && source ./.test.env && jest --detectOpenHandles --coverage --setupFiles dotenv/config --runInBand --forceExit --verbose false  --testRegex '(/(__tests__|__test__|test|tests)/.*.test.js)$'",
     "build": "babel src --out-dir lib --extensions \".ts,.tsx\" --copy-files --source-maps inline",
     "lint": "eslint 'src/**' --ext ts --fix --quiet && npm run build:types",
     "deploy": "npm run build && sls deploy --stage prod",
