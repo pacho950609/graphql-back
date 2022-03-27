@@ -2,7 +2,7 @@ import jwt from 'jsonwebtoken';
 import { EntityManager } from 'typeorm';
 import { User } from 'entities/User';
 
-export const validateToken = async (token: string) => {
+export const validateToken = (token: string) => {
     const user = jwt.verify(token, 'password') as { id: string };
     return user.id;
 };

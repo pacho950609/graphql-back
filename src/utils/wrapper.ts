@@ -36,7 +36,7 @@ export const errorResponse = (errorMessage: string, statusCode = 500): lambda.AP
 
 export const getHeaderToken = (headers: { [name: string]: string }): string => {
     if (!headers || !headers.Authorization) {
-        throw 'Authorization header is required';
+        return null;
     }
     return headers.Authorization;
 };
