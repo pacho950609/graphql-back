@@ -23,6 +23,7 @@ functions:
       - http:
           method: post
           path: signup
+          cors: true
   login:
     handler: lib/handlers/auth/auth-handler.loginHandler
     events:
@@ -30,3 +31,15 @@ functions:
           method: post
           path: login
           cors: true
+  graphql:
+    handler: lib/handlers/graphql/graphql-handler.graphqlHandler
+    events:
+      - http:
+          path: graphql
+          method: post
+          cors: true
+      - http:
+          path: graphql
+          method: get
+          cors: true
+

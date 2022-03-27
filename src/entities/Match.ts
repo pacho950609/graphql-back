@@ -22,23 +22,15 @@ export class Match {
     @Column('uuid')
     loserPlayerId: string;
 
-    @ManyToOne(
-        type => Player,
-    )
+    @ManyToOne((type) => Player)
     firstPlayer: Player;
 
-    @ManyToOne(
-        type => Player,
-    )
+    @ManyToOne((type) => Player)
     secondPlayer: Player;
 
-    @ManyToOne(
-        type => Player,
-    )
+    @ManyToOne((type) => Player)
     winnerPlayer: Player;
 
-    @ManyToOne(
-        type => Player,
-    )
+    @ManyToOne((type) => Player)
     loserPlayer: Player;
 }

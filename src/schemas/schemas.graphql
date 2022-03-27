@@ -1,0 +1,38 @@
+type PlayerRank {
+    id: ID!
+    name: String
+    lastName: String
+    wins: Int
+    losses: Int
+}
+
+type Match {
+    id: ID!
+    firstPlayerId: String!
+    secondPlayerId: String!
+    winnerPlayerId: String!
+    loserPlayerId: String!
+}
+
+input MatchInput {
+    firstPlayerId: String!
+    secondPlayerId: String!
+    winnerPlayerId: String!
+    loserPlayerId: String!
+    sets: [SetInput]!
+}
+
+input SetInput {
+    firstPlayerPoints: Int!
+    secondPlayerPoints: Int!
+}
+
+
+type Query {
+    getRank: [PlayerRank]
+    getBest(id: String!): PlayerRank
+}
+
+type Mutation {
+    addMatch(input: MatchInput!): Match
+}
