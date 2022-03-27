@@ -20,4 +20,25 @@ export class Database {
         }
         return connectionManager.get('potter');
     }
+
+    public static async resetConnection(connection: Connection) {
+        const entities = connection.entityMetadatas;
+        for (const entity of entities) {
+            const repository = connection.getRepository(entity.name);
+            try {
+                await repository.query(
+                    `ALTER TABLE ${entity.schema || 'public'}.${entity.tableNameWithoutPrefix} DISABLE TRIGGER ALL;`,
+                );
+
+                await repository.query(`DELETE FROM ${entity.schema || 'public'}.${entity.tableNameWithoutPrefix};`);
+
+                await repository.query(
+                    `ALTER TABLE ${entity.schema || 'public'}.${entity.tableNameWithoutPrefix} ENABLE TRIGGER ALL;`,
+                );
+            } catch (e) {
+                console.error(`Error while clearing the table ${entity.tableNameWithoutPrefix}`, e);
+                throw e;
+            }
+        }
+    }
 }
