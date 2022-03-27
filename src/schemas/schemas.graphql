@@ -24,8 +24,6 @@ type Match {
 input MatchInput {
     firstPlayerId: String!
     secondPlayerId: String!
-    winnerPlayerId: String!
-    loserPlayerId: String!
     sets: [SetInput]!
 }
 

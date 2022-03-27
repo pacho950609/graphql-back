@@ -12,7 +12,7 @@ export const getPlayerRanking = async () => {
         .select([
             'player.id as id',
             'player.name as name',
-            'player.last_name as lastName',
+            'player.last_name as "lastName"',
             'COALESCE(wins.wins,0):: int wins',
             'COALESCE(losses.losses,0):: int losses',
         ])

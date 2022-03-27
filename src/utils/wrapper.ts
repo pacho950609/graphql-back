@@ -35,10 +35,10 @@ export const errorResponse = (errorMessage: string, statusCode = 500): lambda.AP
 };
 
 export const getHeaderToken = (headers: { [name: string]: string }): string => {
-    if (!headers || !headers.Authorization) {
+    if (!headers || !(headers.Authorization || headers.authorization)) {
         return null;
     }
-    return headers.Authorization;
+    return headers.Authorization || headers.authorization;
 };
 
 export const handlerWrapper = async <T>(

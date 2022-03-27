@@ -9,12 +9,11 @@ export const createMatch = async (params) => {
 
     const {
         sets,
-        ...rest
+        firstPlayerId,
+        secondPlayerId,
     }: {
         firstPlayerId: string;
         secondPlayerId: string;
-        winnerPlayerId: string;
-        loserPlayerId: string;
         sets: {
             firstPlayerPoints: number;
             secondPlayerPoints: number;
@@ -22,8 +21,27 @@ export const createMatch = async (params) => {
         }[];
     } = params;
 
+    const setsWins = sets.reduce(
+        (prev, curr) => {
+            if (curr.firstPlayerPoints > curr.secondPlayerPoints) {
+                return {
+                    first: prev.first + 1,
+                    second: prev.second,
+                };
+            }
+            return {
+                first: prev.first,
+                second: prev.second + 1,
+            };
+        },
+        { first: 0, second: 0 },
+    );
+
+    const winnerPlayerId = setsWins.first > setsWins.second ? firstPlayerId : secondPlayerId;
+    const loserPlayerId = setsWins.first > setsWins.second ? secondPlayerId : firstPlayerId;
+
     const match = new Match();
-    Object.assign(match, { ...rest });
+    Object.assign(match, { firstPlayerId, secondPlayerId, winnerPlayerId, loserPlayerId });
     const createdMatch = await connection.manager.save(match);
 
     const newSets: GameSet[] = [];
