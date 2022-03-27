@@ -40,3 +40,9 @@ export const getPlayerRanking = async () => {
         .addOrderBy('losses', 'ASC')
         .getRawMany();
 };
+
+export const getPlayers = async () => {
+    const database = new Database();
+    const connection: Connection = await database.getConnection();
+    return connection.manager.find(Player);
+};

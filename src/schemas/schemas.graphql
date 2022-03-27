@@ -21,6 +21,12 @@ type Match {
     sets: [Set]
 }
 
+type Player {
+    id: ID!
+    name: String!
+    lastName: String!
+}
+
 input MatchInput {
     firstPlayerId: String!
     secondPlayerId: String!
@@ -36,7 +42,7 @@ input SetInput {
 
 type Query {
     getRank: [PlayerRank]
-    getBest(id: String!): PlayerRank
+    getPlayers: [Player]
 }
 
 type Mutation {
