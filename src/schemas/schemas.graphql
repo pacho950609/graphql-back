@@ -6,12 +6,19 @@ type PlayerRank {
     losses: Int
 }
 
+type Set {
+    firstPlayerPoints: Int!
+    secondPlayerPoints: Int!
+    setNumber: Int!
+}
+
 type Match {
     id: ID!
     firstPlayerId: String!
     secondPlayerId: String!
     winnerPlayerId: String!
     loserPlayerId: String!
+    sets: [Set]
 }
 
 input MatchInput {
@@ -25,6 +32,7 @@ input MatchInput {
 input SetInput {
     firstPlayerPoints: Int!
     secondPlayerPoints: Int!
+    setNumber: Int!
 }
 
 

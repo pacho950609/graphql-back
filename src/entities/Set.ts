@@ -3,7 +3,7 @@ import { Match } from './Match';
 
 @Unique(['setNumber', 'matchId'])
 @Entity()
-export class Set {
+export class GameSet {
     @PrimaryGeneratedColumn('uuid')
     id: string;
 
