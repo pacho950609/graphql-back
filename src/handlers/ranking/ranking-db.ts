@@ -37,6 +37,6 @@ export const getPlayerRanking = async () => {
             'losses.loser_player_id = player.id',
         )
         .orderBy('wins', 'DESC')
-        .orderBy('losses', 'ASC')
+        .addOrderBy('losses', 'ASC')
         .getRawMany();
 };
