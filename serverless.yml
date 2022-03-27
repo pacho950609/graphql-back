@@ -1,4 +1,4 @@
-service: potter-back
+service: graphql-back
 
 custom: ${file(resources/config/custom.yml):custom}
 #app: your-app-name
@@ -11,7 +11,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs12.x
   stage: ${opt:stage,'local'}
   iamRoleStatements: ${file(resources/config/iamRole.yml):iamRoleStatements}
   environment: ${file(resources/config/env.yml):environment}
@@ -42,4 +42,7 @@ functions:
           path: graphql
           method: get
           cors: true
+
+package:
+  excludeDevDependencies: true
 
