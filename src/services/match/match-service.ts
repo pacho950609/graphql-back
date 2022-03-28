@@ -16,23 +16,25 @@ export const validateSet = (set: GameSetI) => {
     ) {
         throw new Error(`Points difference must be two in set ${set.setNumber}`);
     } else if (set.firstPlayerPoints > set.secondPlayerPoints) {
-        if (set.firstPlayerPoints < 11 || set.firstPlayerPoints > 11) throw new Error(`Set must end at 11 points in set in set ${set.setNumber}`);
+        if (set.firstPlayerPoints < 11 || set.firstPlayerPoints > 11)
+            throw new Error(`Set must end at 11 points in set in set ${set.setNumber}`);
     } else if (set.secondPlayerPoints > set.firstPlayerPoints) {
-        if (set.secondPlayerPoints < 11 || set.secondPlayerPoints > 11) throw new Error(`Set must end at 11 points in set in set ${set.setNumber}`);
+        if (set.secondPlayerPoints < 11 || set.secondPlayerPoints > 11)
+            throw new Error(`Set must end at 11 points in set in set ${set.setNumber}`);
     } else if (set.firstPlayerPoints === set.secondPlayerPoints) {
         throw new Error(`There must be a winner in the set ${set.setNumber}`);
     }
 };
 
 export const validateSets = (sets: GameSetI[]) => {
-    _.range(sets.length).map(setNumber => {
-        const set = sets.find(gameSet => gameSet.setNumber === setNumber + 1)
-        if(!set){
-            throw new Error(`Doesn't exist a set with number ${setNumber + 1}`)
-        } 
+    _.range(sets.length).map((setNumber) => {
+        const set = sets.find((gameSet) => gameSet.setNumber === setNumber + 1);
+        if (!set) {
+            throw new Error(`Doesn't exist a set with number ${setNumber + 1}`);
+        }
         validateSet(set);
-    })
-}
+    });
+};
 
 export const createMatch = async (
     params: {
@@ -44,7 +46,6 @@ export const createMatch = async (
 ) => {
     const { sets, firstPlayerId, secondPlayerId } = params;
     validateSets(sets);
-
 
     if (sets.length > 5) {
         throw new Error('Max sets number is 5');
