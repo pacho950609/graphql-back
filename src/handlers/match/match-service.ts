@@ -3,15 +3,8 @@ import { Match } from 'entities/Match';
 import { GameSet } from 'entities/Set';
 import { Connection } from 'typeorm';
 
-export const createMatch = async (params) => {
-    const database = new Database();
-    const connection: Connection = await database.getConnection();
-
-    const {
-        sets,
-        firstPlayerId,
-        secondPlayerId,
-    }: {
+export const createMatch = async (
+    params: {
         firstPlayerId: string;
         secondPlayerId: string;
         sets: {
@@ -19,7 +12,13 @@ export const createMatch = async (params) => {
             secondPlayerPoints: number;
             setNumber: number;
         }[];
-    } = params;
+    },
+    connectionI: Connection = null,
+) => {
+    const database = new Database();
+    const connection: Connection = connectionI || (await database.getConnection());
+
+    const { sets, firstPlayerId, secondPlayerId } = params;
 
     const setsWins = sets.reduce(
         (prev, curr) => {
@@ -40,12 +39,14 @@ export const createMatch = async (params) => {
     const winnerPlayerId = setsWins.first > setsWins.second ? firstPlayerId : secondPlayerId;
     const loserPlayerId = setsWins.first > setsWins.second ? secondPlayerId : firstPlayerId;
 
-    const match = await connection.manager.save(new Match({
-        firstPlayerId,
-        secondPlayerId,
-        winnerPlayerId,
-        loserPlayerId
-    }));
+    const match = await connection.manager.save(
+        new Match({
+            firstPlayerId,
+            secondPlayerId,
+            winnerPlayerId,
+            loserPlayerId,
+        }),
+    );
 
     const newSets: GameSet[] = [];
     for (const set of sets) {
