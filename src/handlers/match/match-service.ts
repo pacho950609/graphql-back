@@ -40,24 +40,27 @@ export const createMatch = async (params) => {
     const winnerPlayerId = setsWins.first > setsWins.second ? firstPlayerId : secondPlayerId;
     const loserPlayerId = setsWins.first > setsWins.second ? secondPlayerId : firstPlayerId;
 
-    const match = new Match();
-    Object.assign(match, { firstPlayerId, secondPlayerId, winnerPlayerId, loserPlayerId });
-    const createdMatch = await connection.manager.save(match);
+    const match = await connection.manager.save(new Match({
+        firstPlayerId,
+        secondPlayerId,
+        winnerPlayerId,
+        loserPlayerId
+    }));
 
     const newSets: GameSet[] = [];
     for (const set of sets) {
         const newSet = new GameSet();
-        Object.assign(newSet, { ...set, matchId: createdMatch.id });
+        Object.assign(newSet, { ...set, matchId: match.id });
         newSets.push(newSet);
     }
     const createdSets = await connection.manager.save(newSets);
 
     return {
-        id: createdMatch.id,
-        firstPlayerId: createdMatch.firstPlayerId,
-        secondPlayerId: createdMatch.secondPlayerId,
-        winnerPlayerId: createdMatch.winnerPlayerId,
-        loserPlayerId: createdMatch.loserPlayerId,
+        id: match.id,
+        firstPlayerId: match.firstPlayerId,
+        secondPlayerId: match.secondPlayerId,
+        winnerPlayerId: match.winnerPlayerId,
+        loserPlayerId: match.loserPlayerId,
         sets: createdSets.map((set) => ({
             firstPlayerPoints: set.firstPlayerPoints,
             secondPlayerPoints: set.secondPlayerPoints,

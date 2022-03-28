@@ -34,7 +34,7 @@ export class Match {
     @ManyToOne((type) => Player)
     loserPlayer: Player;
 
-    constructor(payload: Omit<Match, 'id' | 'firstPlayer' | 'secondPlayer' | 'winnerPlayer' | 'loserPlayer'> = null) {
+    constructor(payload: Omit<Match, 'id' | 'firstPlayer' | 'secondPlayer' | 'winnerPlayer' | 'loserPlayer'>) {
         if (payload) {
             this.firstPlayerId = payload.firstPlayerId;
             this.secondPlayerId = payload.secondPlayerId;

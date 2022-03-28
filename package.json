@@ -65,7 +65,6 @@
     "eslint-plugin-sonarjs": "^0.3.0",
     "jest": "^27.5.1",
     "prettier": "^2.0.5",
-    "serverless-export-env": "^2.1.0",
     "serverless-offline": "^6.3.0",
     "serverless-offline-lambda": "^1.0.6",
     "ts-loader": "^5.3.3",

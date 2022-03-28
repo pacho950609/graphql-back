@@ -8,7 +8,6 @@ custom: ${file(resources/config/custom.yml):custom}
 plugins:
   - serverless-offline-lambda
   - serverless-offline
-  - serverless-export-env
 
 provider:
   name: aws
