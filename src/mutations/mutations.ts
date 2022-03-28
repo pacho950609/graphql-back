@@ -1,10 +1,13 @@
 import { createMatch } from 'services/match/match-service';
+import { wrapper } from 'utils/wrapper';
 
 export const mutations = {
     addMatch: async (root, { input }, { userId }) => {
-        if (!userId) {
-            throw new Error('Authorization header is required');
-        }
-        return createMatch(input);
+        return await wrapper(async (connection) => {
+            if (!userId) {
+                throw new Error('Authorization header is required');
+            }
+            return await createMatch(input, connection);
+        });
     },
 };

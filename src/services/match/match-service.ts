@@ -13,11 +13,8 @@ export const createMatch = async (
             setNumber: number;
         }[];
     },
-    connectionI: Connection = null,
+    connection: Connection = null,
 ) => {
-    const database = new Database();
-    const connection: Connection = connectionI || (await database.getConnection());
-
     const { sets, firstPlayerId, secondPlayerId } = params;
 
     const setsWins = sets.reduce(

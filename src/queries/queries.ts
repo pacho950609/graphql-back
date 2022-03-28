@@ -1,10 +1,11 @@
-import { getPlayerRanking, getPlayers } from 'services/ranking/ranking-db';
+import { getPlayerRanking, getPlayers } from 'services/ranking/ranking-service';
+import { wrapper } from 'utils/wrapper';
 
 export const queries = {
     getRank: async () => {
-        return await getPlayerRanking();
+        return await wrapper(async (connection) => await getPlayerRanking(connection));
     },
     getPlayers: async () => {
-        return await getPlayers();
+        return await wrapper(async (connection) => await getPlayers(connection));
     },
 };

@@ -3,7 +3,7 @@ import { Player } from 'entities/Player';
 import { Connection } from 'typeorm';
 import Chance from 'chance';
 import { Match } from 'entities/Match';
-import { getPlayerRanking } from '../ranking-db';
+import { getPlayerRanking } from '../ranking-service';
 
 const chance = new Chance();
 const database = new Database();

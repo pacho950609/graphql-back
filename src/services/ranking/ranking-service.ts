@@ -4,7 +4,7 @@ import { Player } from 'entities/Player';
 import { Connection } from 'typeorm';
 
 export const getPlayerRanking = async (
-    connectionI: Connection = null,
+    connection: Connection = null,
 ): Promise<
     {
         id: string;
@@ -14,9 +14,6 @@ export const getPlayerRanking = async (
         losses: number;
     }[]
 > => {
-    const database = new Database();
-    const connection: Connection = connectionI || (await database.getConnection());
-
     return await connection.manager
         .createQueryBuilder(Player, 'player')
         .select([
@@ -51,8 +48,6 @@ export const getPlayerRanking = async (
         .getRawMany();
 };
 
-export const getPlayers = async () => {
-    const database = new Database();
-    const connection: Connection = await database.getConnection();
+export const getPlayers = async (connection: Connection) => {
     return connection.manager.find(Player);
 };

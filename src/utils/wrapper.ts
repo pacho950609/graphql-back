@@ -72,3 +72,14 @@ export const handlerWrapper = async <T>(
         return errorResponse(e.message ? e.message : e, e.code ? e.code : 500);
     }
 };
+
+export const wrapper = async <T>(operation: (connection: Connection) => Promise<object>): Promise<object> => {
+    const database = new Database();
+    try {
+        const connection: Connection = await database.getConnection();
+        return await operation(connection);
+    } catch (e) {
+        console.error('error', e);
+        throw e;
+    }
+};
