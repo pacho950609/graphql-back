@@ -20,6 +20,7 @@ const server = new ApolloServer({
         },
     },
     context: ({ event }) => {
+        // Add userId to context if there is a authorization header
         const token = getHeaderToken(event.headers);
         if (token) {
             const userId = validateToken(token);

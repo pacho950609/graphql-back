@@ -1,6 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, Index, ManyToOne } from 'typeorm';
 import { Player } from './Player';
 
+/**
+ * Match db entity
+ */
 @Entity()
 export class Match {
     @PrimaryGeneratedColumn('uuid')

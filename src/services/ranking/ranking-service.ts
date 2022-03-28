@@ -2,6 +2,11 @@ import { Match } from 'entities/Match';
 import { Player } from 'entities/Player';
 import { Connection } from 'typeorm';
 
+/**
+ * Calculate and return the players ranking
+ * @param connection 
+ * @returns player ranking
+ */
 export const getPlayerRanking = async (
     connection: Connection = null,
 ): Promise<
@@ -47,6 +52,11 @@ export const getPlayerRanking = async (
         .getRawMany();
 };
 
+/**
+ * Get list of players
+ * @param connection 
+ * @returns 
+ */
 export const getPlayers = async (connection: Connection) => {
     return connection.manager.find(Player);
 };

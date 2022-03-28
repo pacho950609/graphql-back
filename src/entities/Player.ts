@@ -1,5 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
+/**
+ * Player db entity
+ */
 @Entity()
 export class Player {
     @PrimaryGeneratedColumn('uuid')

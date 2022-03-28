@@ -1,6 +1,9 @@
 import { Entity, PrimaryGeneratedColumn, Column, Unique, Index, ManyToOne, Check } from 'typeorm';
 import { Match } from './Match';
 
+/**
+ * Game set db entity
+ */
 @Unique(['setNumber', 'matchId'])
 @Entity()
 export class GameSet {

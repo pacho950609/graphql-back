@@ -9,6 +9,11 @@ interface GameSetI {
     secondPlayerPoints: number;
     setNumber: number;
 }
+
+/**
+ * Validate that game set follows the ping pong rules
+ * @param sets 
+ */
 export const validateSet = (set: GameSetI) => {
     if (
         set.firstPlayerPoints >= 10 &&
@@ -27,6 +32,10 @@ export const validateSet = (set: GameSetI) => {
     }
 };
 
+/**
+ * Validate that game sets follows the ping pong rules
+ * @param sets 
+ */
 export const validateSets = (sets: GameSetI[]) => {
     _.range(sets.length).map((setNumber) => {
         const set = sets.find((gameSet) => gameSet.setNumber === setNumber + 1);
@@ -37,6 +46,12 @@ export const validateSets = (sets: GameSetI[]) => {
     });
 };
 
+/**
+ * Create and store a new match
+ * @param params 
+ * @param connection 
+ * @returns Created match
+ */
 export const createMatch = async (
     params: {
         firstPlayerId: string;

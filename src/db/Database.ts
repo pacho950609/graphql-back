@@ -13,6 +13,10 @@ export class Database {
         this.config = getConfig(process.env.DB_NAME);
     }
 
+    /**
+     * Get a DB connection
+     * @returns 
+     */
     public async getConnection(): Promise<Connection> {
         const connectionManager = getConnectionManager();
         if (!connectionManager.has('potter')) {
@@ -21,6 +25,10 @@ export class Database {
         return connectionManager.get('potter');
     }
 
+    /**
+     * Delete db Data (just for testing env)
+     * @param connection 
+     */
     public static async resetConnection(connection: Connection) {
         const entities = connection.entityMetadatas;
         for (const entity of entities) {

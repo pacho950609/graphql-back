@@ -1,5 +1,8 @@
 import { Entity, PrimaryGeneratedColumn, Column, Index } from 'typeorm';
 
+/**
+ * User db entity
+ */
 @Entity()
 export class User {
     @PrimaryGeneratedColumn('uuid')
