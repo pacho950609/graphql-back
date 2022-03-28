@@ -1,4 +1,4 @@
-import { createMatch } from 'handlers/match/match-service';
+import { createMatch } from 'services/match/match-service';
 
 export const mutations = {
     addMatch: async (root, { input }, { userId }) => {

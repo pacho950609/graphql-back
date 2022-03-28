@@ -1,4 +1,4 @@
-import { getPlayerRanking, getPlayers } from 'handlers/ranking/ranking-db';
+import { getPlayerRanking, getPlayers } from 'services/ranking/ranking-db';
 
 export const queries = {
     getRank: async () => {

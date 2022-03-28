@@ -5,7 +5,7 @@ import { join } from 'path';
 import { queries } from 'queries/queries';
 import { mutations } from 'mutations/mutations';
 import { getHeaderToken } from 'utils/wrapper';
-import { validateToken } from 'handlers/auth/auth-service';
+import { validateToken } from 'services/auth/auth-service';
 
 const schema = buildSchema(readFileSync(join('./', 'lib', 'schemas', 'schemas.graphql'), 'utf-8'));
 

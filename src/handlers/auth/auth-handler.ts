@@ -1,6 +1,6 @@
 import * as lambda from 'aws-lambda';
 import { handlerWrapper } from 'utils/wrapper';
-import { signUp, login } from './auth-service';
+import { signUp, login } from '../../services/auth/auth-service';
 
 export const signUpHandler = async (event: lambda.APIGatewayProxyEvent): Promise<lambda.APIGatewayProxyResult> => {
     return handlerWrapper({}, async (dbCon) => {
