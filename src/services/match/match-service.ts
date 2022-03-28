@@ -16,10 +16,10 @@ export const validateSet = (set: GameSetI) => {
     ) {
         throw new Error(`Points difference must be two in set ${set.setNumber}`);
     } else if (set.firstPlayerPoints > set.secondPlayerPoints) {
-        if (set.firstPlayerPoints < 11 || set.firstPlayerPoints > 11)
+        if (set.firstPlayerPoints < 11 || (set.firstPlayerPoints > 11 && set.secondPlayerPoints < 10))
             throw new Error(`Set must end at 11 points in set in set ${set.setNumber}`);
     } else if (set.secondPlayerPoints > set.firstPlayerPoints) {
-        if (set.secondPlayerPoints < 11 || set.secondPlayerPoints > 11)
+        if (set.secondPlayerPoints < 11 || (set.secondPlayerPoints > 11 && set.firstPlayerPoints < 10))
             throw new Error(`Set must end at 11 points in set in set ${set.setNumber}`);
     } else if (set.firstPlayerPoints === set.secondPlayerPoints) {
         throw new Error(`There must be a winner in the set ${set.setNumber}`);
