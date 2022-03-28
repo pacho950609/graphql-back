@@ -25,7 +25,7 @@ export const signUp = async (email: string, password: string, manager: EntityMan
     });
 
     if (user) {
-        throw 'User already exist';
+        throw new Error('User already exist');
     } else {
         const newUser = new User();
         newUser.email = email;
@@ -50,5 +50,5 @@ export const login = async (email: string, password: string, manager: EntityMana
     if (user && password === user.password) {
         return jwt.sign({ id: user.id }, 'password');
     }
-    throw 'Wrong user or password';
+    throw new Error('Wrong user or password');
 };
