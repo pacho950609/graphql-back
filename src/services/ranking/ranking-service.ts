@@ -1,4 +1,3 @@
-import { Database } from 'db/Database';
 import { Match } from 'entities/Match';
 import { Player } from 'entities/Player';
 import { Connection } from 'typeorm';
