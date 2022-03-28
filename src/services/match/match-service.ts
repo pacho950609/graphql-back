@@ -1,7 +1,8 @@
 import { Match } from 'entities/Match';
 import { GameSet } from 'entities/Set';
-import { Connection } from 'typeorm';
+import { Connection, In } from 'typeorm';
 import _ from 'lodash';
+import { Player } from 'entities/Player';
 
 interface GameSetI {
     firstPlayerPoints: number;
@@ -46,6 +47,11 @@ export const createMatch = async (
 ) => {
     const { sets, firstPlayerId, secondPlayerId } = params;
     validateSets(sets);
+
+    const players = await connection.manager.find(Player, { id: In([params.firstPlayerId, params.secondPlayerId]) });
+    if (players.length !== 2) {
+        throw new Error('Players with given ids must exist');
+    }
 
     if (sets.length > 5) {
         throw new Error('Max sets number is 5');
