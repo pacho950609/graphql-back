@@ -4,8 +4,8 @@ import { User } from 'entities/User';
 
 /**
  * Validate if it's a valid token
- * @param token 
- * @returns 
+ * @param token
+ * @returns
  */
 export const validateToken = (token: string) => {
     const user = jwt.verify(token, 'password') as { id: string };
@@ -14,10 +14,10 @@ export const validateToken = (token: string) => {
 
 /**
  * Create a new user
- * @param email 
- * @param password 
- * @param manager 
- * @returns 
+ * @param email
+ * @param password
+ * @param manager
+ * @returns
  */
 export const signUp = async (email: string, password: string, manager: EntityManager) => {
     const user = await manager.findOne(User, {
@@ -37,9 +37,9 @@ export const signUp = async (email: string, password: string, manager: EntityMan
 
 /**
  * Validate user credentials and return a token
- * @param email 
- * @param password 
- * @param manager 
+ * @param email
+ * @param password
+ * @param manager
  * @returns user token
  */
 export const login = async (email: string, password: string, manager: EntityManager) => {

@@ -4,7 +4,7 @@ import { Connection } from 'typeorm';
 
 /**
  * Calculate and return the players ranking
- * @param connection 
+ * @param connection
  * @returns player ranking
  */
 export const getPlayerRanking = async (
@@ -54,8 +54,8 @@ export const getPlayerRanking = async (
 
 /**
  * Get list of players
- * @param connection 
- * @returns 
+ * @param connection
+ * @returns
  */
 export const getPlayers = async (connection: Connection) => {
     return connection.manager.find(Player);

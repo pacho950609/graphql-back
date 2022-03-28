@@ -4,8 +4,8 @@ import { signUp, login } from '../../services/auth/auth-service';
 
 /**
  * Create a new users
- * @param event 
- * @returns 
+ * @param event
+ * @returns
  */
 export const signUpHandler = async (event: lambda.APIGatewayProxyEvent): Promise<lambda.APIGatewayProxyResult> => {
     return handlerWrapper({}, async (dbCon) => {
@@ -17,8 +17,8 @@ export const signUpHandler = async (event: lambda.APIGatewayProxyEvent): Promise
 
 /**
  * Validate user credentials and return a token
- * @param event 
- * @returns 
+ * @param event
+ * @returns
  */
 export const loginHandler = async (event: lambda.APIGatewayProxyEvent): Promise<lambda.APIGatewayProxyResult> => {
     return handlerWrapper({ cors: true }, async (dbCon) => {

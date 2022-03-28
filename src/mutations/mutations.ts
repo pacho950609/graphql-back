@@ -2,7 +2,7 @@ import { createMatch } from 'services/match/match-service';
 import { wrapper } from 'utils/wrapper';
 
 /**
- * List of graphql allowed mutations 
+ * List of graphql allowed mutations
  */
 export const mutations = {
     addMatch: async (root, { input }, { userId }) => {

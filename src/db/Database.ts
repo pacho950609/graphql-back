@@ -15,7 +15,7 @@ export class Database {
 
     /**
      * Get a DB connection
-     * @returns 
+     * @returns
      */
     public async getConnection(): Promise<Connection> {
         const connectionManager = getConnectionManager();
@@ -27,7 +27,7 @@ export class Database {
 
     /**
      * Delete db Data (just for testing env)
-     * @param connection 
+     * @param connection
      */
     public static async resetConnection(connection: Connection) {
         const entities = connection.entityMetadatas;

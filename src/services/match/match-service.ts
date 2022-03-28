@@ -12,7 +12,7 @@ interface GameSetI {
 
 /**
  * Validate that game set follows the ping pong rules
- * @param sets 
+ * @param sets
  */
 export const validateSet = (set: GameSetI) => {
     if (
@@ -34,7 +34,7 @@ export const validateSet = (set: GameSetI) => {
 
 /**
  * Validate that game sets follows the ping pong rules
- * @param sets 
+ * @param sets
  */
 export const validateSets = (sets: GameSetI[]) => {
     _.range(sets.length).map((setNumber) => {
@@ -48,8 +48,8 @@ export const validateSets = (sets: GameSetI[]) => {
 
 /**
  * Create and store a new match
- * @param params 
- * @param connection 
+ * @param params
+ * @param connection
  * @returns Created match
  */
 export const createMatch = async (
@@ -99,22 +99,27 @@ export const createMatch = async (
     const winnerPlayerId = setsWins.first > setsWins.second ? firstPlayerId : secondPlayerId;
     const loserPlayerId = setsWins.first > setsWins.second ? secondPlayerId : firstPlayerId;
 
-    const match = await connection.manager.save(
-        new Match({
-            firstPlayerId,
-            secondPlayerId,
-            winnerPlayerId,
-            loserPlayerId,
-        }),
-    );
-
+    let match;
     const newSets: GameSet[] = [];
-    for (const set of sets) {
-        const newSet = new GameSet();
-        Object.assign(newSet, { ...set, matchId: match.id });
-        newSets.push(newSet);
-    }
-    const createdSets = await connection.manager.save(newSets);
+    let createdSets;
+
+    await connection.manager.transaction(async (tManager) => {
+        match = await tManager.save(
+            new Match({
+                firstPlayerId,
+                secondPlayerId,
+                winnerPlayerId,
+                loserPlayerId,
+            }),
+        );
+
+        for (const set of sets) {
+            const newSet = new GameSet();
+            Object.assign(newSet, { ...set, matchId: match.id });
+            newSets.push(newSet);
+        }
+        createdSets = await tManager.save(newSets);
+    });
 
     return {
         id: match.id,
