@@ -18,11 +18,11 @@ export class GameSet {
     @Column()
     setNumber: number;
 
-    @Check('"first_player_points" > 0')
+    @Check('"first_player_points" >= 0')
     @Column()
     firstPlayerPoints: number;
 
-    @Check('"second_player_points" > 0')
+    @Check('"second_player_points" >= 0')
     @Column()
     secondPlayerPoints: number;
 
